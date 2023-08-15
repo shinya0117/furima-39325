@@ -62,7 +62,7 @@
 | street_address | string     | null: false                    |
 | build_name     | string     |                                |
 | tel            | string     | null: false                    |
-| record         | references | null: false, foreign_key: true |
+| purchase       | references | null: false, foreign_key: true |
 
 ### Association
 
