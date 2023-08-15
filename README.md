@@ -4,16 +4,16 @@
 
 ## usersテーブル
 
-| Column             | Type   | Options             |
-| ------------------ | ------ | ------------------- |
-| nickname           | string | null: false         |
-| email              | string | null: false, unique |
-| encrypted_password | string | null: false         |
-| last_name          | string | null: false         |
-| first_name         | string | null: false         |
-| last_name_kana     | string | null: false         |
-| first_name_kana    | string | null: false         |
-| birth_date         | date   | null: false         |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birth_date         | date   | null: false               |
 
 ### Association
 
@@ -29,8 +29,8 @@
 | item_category     | integer    | null: false                    |
 | item_sales_status | integer    | null: false                    |
 | sipping_fee       | integer    | null: false                    |
-| item_price        | string     | null: false                    |
-| users             | references | null: false, foreign_key: true |
+| item_price        | integer    | null: false                    |
+| user              | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -41,16 +41,16 @@
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
-| users  | references | null: false, foreign_key: true |
-| items  | references | null: false, foreign_key: true |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
 - has_one :information
 
-## informationテーブル
+## informationsテーブル
 
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
@@ -60,8 +60,8 @@
 | street_address | string     | null: false                    |
 | build_name     | string     |                                |
 | number         | string     | null: false                    |
-| records        | references | null: false, foreign_key: true |
+| record         | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :records
+- belongs_to :record
