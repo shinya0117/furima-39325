@@ -54,6 +54,11 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
+      it 'birth_dateが空では登録できない' do
+        @user.birth_date = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Birth date can't be blank")
+      end
       it '重複したemailが存在する場合は登録できない' do
         @user.save
         another_user = FactoryBot.build(:user)
@@ -82,6 +87,24 @@ RSpec.describe User, type: :model do
       it 'passwordが英数字を含まないと登録できない' do
         @user.password ='aaaaaa'
         @user.password_confirmation ='aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end
+      it 'passwordが英字のみの場合登録できない' do
+        @user.password ='aaaaaa'
+        @user.password_confirmation ='aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end
+      it 'passwordが数字のみの場合登録できない' do
+        @user.password ='111111'
+        @user.password_confirmation ='111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end
+      it 'passwordに半角英数字以外が含まれている場合登録できない' do
+        @user.password ='ああああああ'
+        @user.password_confirmation ='ああああああ'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
       end

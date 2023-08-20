@@ -3,11 +3,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :items
+  #has_many :items
 
   validates :nickname, presence: true
-  validates :last_name, presence: true, format: { with: /\A[一-龥ぁ-んァ-ヶー－]+\z/, message: "全角文字を使用してください" }
-  validates :first_name, presence: true, format: { with: /\A[一-龥ぁ-んァ-ヶー－]+\z/, message: "全角文字を使用してください" }
+  validates :last_name, presence: true, format: { with: /\A[一-龥ぁ-んァ-ヶー－々]+\z/, message: "全角文字を使用してください" }
+  validates :first_name, presence: true, format: { with: /\A[一-龥ぁ-んァ-ヶー－々]+\z/, message: "全角文字を使用してください" }
   validates :last_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: "全角のカタカナで入力してください" }
   validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: "全角のカタカナで入力してください" }
   validates :birth_date, presence: true
