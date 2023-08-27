@@ -82,6 +82,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Item info is too long (maximum is 1000 characters)")
       end
+      it 'userが紐づいていないと出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
     end
   end
 end
