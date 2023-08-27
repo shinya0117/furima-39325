@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @item = FactoryBot.build(:item)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.build(:item, user: @user)
   end
   describe '商品出品' do
     context '商品が出品できるとき' do
@@ -26,28 +27,28 @@ RSpec.describe Item, type: :model do
           @item.valid?
           expect(@item.errors.full_messages).to include("Item info can't be blank")
       end
-      it 'item_catogory_idが空では出品できない' do
-          @item.item_category_id = ''
+      it 'item_catogory_idが1では出品できない' do
+          @item.item_category_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Item category can't be blank")
       end
-      it 'item_sales_status_idが空では出品できない' do
-          @item.item_sales_status_id = ''
+      it 'item_sales_status_idが1では出品できない' do
+          @item.item_sales_status_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Item sales status can't be blank")
       end
-      it 'sipping_fee_idが空では出品できない' do
-        @item.sipping_fee_id = ''
+      it 'sipping_fee_idが1では出品できない' do
+        @item.sipping_fee_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Sipping fee can't be blank")
       end
-      it 'prefecture_idが空では出品できない' do
-          @item.prefecture_id = ''
+      it 'prefecture_idが1では出品できない' do
+          @item.prefecture_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it 'sipping_day_idが空では出品できない' do
-          @item.sipping_day_id = ''
+      it 'sipping_day_idが1では出品できない' do
+          @item.sipping_day_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Sipping day can't be blank")
       end

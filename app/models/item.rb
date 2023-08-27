@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :user
   has_one_attached :item_image
   belongs_to :item_category
   belongs_to :item_sales_status
@@ -20,8 +21,9 @@ class Item < ApplicationRecord
   validates :sipping_fee_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :sipping_day_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :item_price, presence: true, format: {
-    with: /\A(?:[3-9]\d{2}|[1-9]\d{4,6})\z/,
+  validates :item_price, presence: true, numericality: {
+    greater_than_or_equal_to: 300,
+    less_than_or_equal_to: 9_999_999,
     message: "は¥300から¥9,999,999の範囲で設定してください。"
   }
 end
