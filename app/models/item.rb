@@ -24,6 +24,7 @@ class Item < ApplicationRecord
   validates :item_price, presence: true, numericality: {
     greater_than_or_equal_to: 300,
     less_than_or_equal_to: 9_999_999,
-    message: "は¥300から¥9,999,999の範囲で設定してください。"
-  }, format: { with: /\A[0-9]+\z/ }
+    message: "は¥300から¥9,999,999の範囲で設定してください。",
+    only_integer: true
+  }
 end
