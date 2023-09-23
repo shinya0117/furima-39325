@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
+  has_one :purchase
   has_one_attached :item_image
   belongs_to :item_category
   belongs_to :item_sales_status
@@ -22,4 +23,5 @@ class Item < ApplicationRecord
     message: 'は¥300から¥9,999,999の範囲で設定してください。',
     only_integer: true
   }
+
 end
