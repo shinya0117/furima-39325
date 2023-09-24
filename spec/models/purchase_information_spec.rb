@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe PurchaseInformation, type: :model do
   before do
-    @purchase_information = FactoryBot.build(:purchase_information)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @purchase_information = FactoryBot.build(:purchase_information, user_id: @user.id, item_id: @item.id)
   end
   describe '配送先情報登録'do
     context '内容に問題がない場合' do
@@ -48,6 +50,11 @@ RSpec.describe PurchaseInformation, type: :model do
       end
       it 'telがハイフンを含まない正しい形式でないと保存できない' do
         @purchase_information.tel = '090-1234-5678'
+        @purchase_information.valid?
+        expect(@purchase_information.errors.full_messages).to include("Tel is invalid")
+      end
+      it 'telの桁数が12桁以上だと保存できない' do
+        @purchase_information.tel = '09012345678910'
         @purchase_information.valid?
         expect(@purchase_information.errors.full_messages).to include("Tel is invalid")
       end

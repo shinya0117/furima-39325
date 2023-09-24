@@ -1,7 +1,7 @@
 class PurchaseInformation
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :municipalities, :street_address, :build_name, :tel, :token
-
+  
   with_options presence: true do
     validates :user_id 
     validates :item_id
@@ -9,8 +9,8 @@ class PurchaseInformation
     validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
     validates :municipalities
     validates :street_address
-    validates :tel, format: { with: /\A[0-9]{11}\z/, message: 'is invalid' }
-    validates :token, presence: true
+    validates :tel, format: { with: /\A[0-9]{10,11}\z/, message: 'is invalid' }
+    validates :token
   end
 
   def save
