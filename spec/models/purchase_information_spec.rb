@@ -58,6 +58,16 @@ RSpec.describe PurchaseInformation, type: :model do
         @purchase_information.valid?
         expect(@purchase_information.errors.full_messages).to include('Tel is invalid')
       end
+      it 'telの桁数が12桁以上だと保存できない' do
+        @purchase_information.tel = '09012345678910'
+        @purchase_information.valid?
+        expect(@purchase_information.errors.full_messages).to include('Tel is invalid')
+      end
+      it 'telに半角数字以外が含まれている場合保存できない' do
+        @purchase_information.tel = '０９０１２３４５６７８'
+        @purchase_information.valid?
+        expect(@purchase_information.errors.full_messages).to include('Tel is invalid')
+      end
       it 'userが紐付いていないと保存できないこと' do
         @purchase_information.user_id = nil
         @purchase_information.valid?
