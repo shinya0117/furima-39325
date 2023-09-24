@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to :sipping_fee
   belongs_to :prefecture
   belongs_to :sipping_day
-  
+
   validates :item_image, presence: true
   validates :item_name, presence: true, length: { minimum: 1, maximum: 40 }
   validates :item_info, presence: true, length: { minimum: 1, maximum: 1000 }
@@ -23,5 +23,4 @@ class Item < ApplicationRecord
     message: 'は¥300から¥9,999,999の範囲で設定してください。',
     only_integer: true
   }
-
 end
